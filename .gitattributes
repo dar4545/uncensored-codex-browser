@@ -1,0 +1,10 @@
+# Keep the published repository readable everywhere: text files are stored with LF,
+# while Windows launchers keep CRLF so they behave in cmd.exe.
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Binary-ish files: never diff, never normalise.
+*.exe binary
+*.dll binary
+*.bak binary

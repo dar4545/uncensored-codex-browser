@@ -1,0 +1,33 @@
+# Run receipts and investigation records: they carry machine-specific detail
+# (absolute paths, page URLs, window ids). Kept locally only — see records/README.md.
+/records/*.json
+!/records/README.md
+
+# Backups and scratch files created while patching.
+*.bak
+*.patched
+*.old
+*.tmp
+*.tmp-*
+*.log
+
+# Local configuration and credentials.
+.env
+.env.*
+!.env.example
+config.toml
+config.toml.*
+auth.json
+
+# Dependencies and compiled binaries.
+node_modules/
+*.exe
+*.dll
+
+# Editor and operating-system clutter.
+.vscode/
+.idea/
+.kilo/
+.DS_Store
+Thumbs.db
+Desktop.ini

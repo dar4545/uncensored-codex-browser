@@ -1,0 +1,20 @@
+{
+  "name": "uncensored-codex-browser",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Patches that remove refusal from Codex (Windows only): restricted domains stop being blocked in the in-app browser and in Computer Use, and explicit user instructions get the final say.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "os": ["win32"],
+  "scripts": {
+    "patch": "patch.cmd",
+    "dry-run": "patch.cmd --dry-run",
+    "verify": "patch.cmd --verify",
+    "restore": "patch.cmd --restore",
+    "patch:browser": "node tools/patch-codex-browser-allow-all.mjs",
+    "patch:native": "node tools/patch-computer-use-url-policy.mjs",
+    "patch:docs": "node tools/patch-computer-use-docs.mjs",
+    "audit": "node tools/check-codex-home.mjs"
+  }
+}
