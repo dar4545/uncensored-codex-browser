@@ -118,7 +118,7 @@ const RULES = [
   {
     id: 'site-status',
     title: 'site-status gate (fetchBlocked) — a page can never be site-status blocked',
-    find: /\{let (\w+)=await \w+\((\w+),\w+\.endpoint,\{method:"GET"\}\);if\(!\w+\.ok\)throw new \w+\(\w+\.status\);let \w+=await \w+\.json\(\);return \w+\(\w+\)\}/g,
+    find: /\{let ([\w$]+)=await ([\w$]+)\(([\w$]+),[\w$]+\.endpoint,\{method:"GET"\}\);if\(![\w$]+\.ok\)throw new [\w$]+\([\w$]+\.status\);let [\w$]+=await [\w$]+\.json\(\);return [\w$]+\([\w$]+\)\}/g,
     replace: '{/*' + MARKER + ':site-status*/return!1}',
     patched: /\{\/\*codex-allowall-patch:site-status\*\/return!1\}/g,
     originalsAfterPatch: 0,
@@ -127,16 +127,16 @@ const RULES = [
   {
     id: 'origin-policy',
     title: 'origin/network policy gateway (getOriginPolicyDecision) — always allowed',
-    find: /async getOriginPolicyDecision\((\w+),(\w+)\)\{/g,
+    find: /async getOriginPolicyDecision\(([\w$]+),([\w$]+)\)\{/g,
     replace: 'async getOriginPolicyDecision($1,$2){/*' + MARKER + ':origin-policy*/return null;',
-    patched: /async getOriginPolicyDecision\(\w+,\w+\)\{\/\*codex-allowall-patch:origin-policy\*\/return null;/g,
+    patched: /async getOriginPolicyDecision\([\w$]+,[\w$]+\)\{\/\*codex-allowall-patch:origin-policy\*\/return null;/g,
     originalsAfterPatch: 1,
     expected: 1,
   },
   {
     id: 'host-callback',
     title: 'host-app callback (assertBrowserUrlAllowed) — the two guard calls are neutralized',
-    find: /await this\.runtime\.assertBrowserUrlAllowed\?\.\((\w+)\)/g,
+    find: /await this\.runtime\.assertBrowserUrlAllowed\?\.\(([\w$]+)\)/g,
     replace: 'void 0/*' + MARKER + ':host-callback*/',
     patched: /void 0\/\*codex-allowall-patch:host-callback\*\//g,
     originalsAfterPatch: 0,
